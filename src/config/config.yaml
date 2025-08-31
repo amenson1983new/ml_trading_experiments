@@ -1,0 +1,59 @@
+# Trading Configuration
+trading:
+  target_profitability: 0.85
+  risk_per_trade: 0.02
+  stop_loss_multiplier: 2.0
+  take_profit_multiplier: 3.0
+  min_confidence_threshold: 0.7
+
+# Model Parameters
+models:
+  lstm:
+    sequence_length: 60
+    hidden_size: 128
+    num_layers: 2
+    dropout: 0.2
+    learning_rate: 0.001
+    epochs: 100
+    batch_size: 32
+    
+  gru:
+    sequence_length: 60
+    hidden_size: 128
+    num_layers: 2
+    dropout: 0.2
+    learning_rate: 0.001
+    epochs: 100
+    batch_size: 32
+    
+  ensemble:
+    models:
+      - RandomForest
+      - XGBoost
+      - SVM
+    voting: "soft"
+    
+# Data Processing
+data:
+  features:
+    - close
+    - high
+    - low
+    - volume
+    - rsi
+    - sma
+    - ema
+    - STOCHk_14_3_3
+    - STOCHd_14_3_3
+    - ADX_14
+    - DMP_14
+    - DMN_14
+    - MACD_3_9_21
+    - MACDh_3_9_21
+    - MACDs_3_9_21
+  
+  target_columns:
+    - profitability
+    
+  test_size: 0.2
+  validation_size: 0.1
